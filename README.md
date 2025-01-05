@@ -12,7 +12,7 @@ This tool analyzes videos by extracting frames and processing them through a Kob
 
 ## Installation
 
-###Windows
+### Windows
 
 1. Clone or zip this repository and extract it
 2. Download koboldcpp from the lostruins repo and name it koboldcpp.exe and place it in the directory
