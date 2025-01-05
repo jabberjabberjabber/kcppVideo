@@ -1,0 +1,11 @@
+decord
+numpy
+Pillow
+requests
+typing-extensions
+requests
+asyncio
+sseclient
+aiohttp
+jinja2
+pyqt6
