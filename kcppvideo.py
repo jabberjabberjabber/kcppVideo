@@ -11,9 +11,6 @@ import subprocess
 import tempfile
 import glob
 
-
-MAX_NUM_FRAMES = 64
-
 def get_scene_frames(video_path, threshold=0.1, min_gap=4, format='png'):
     """Gets scene change frames with frame numbers and timecode.
     
@@ -69,8 +66,8 @@ def calculate_summary_tokens(client: KoboldAPI, current_batch: int,
     return min(target_summary, available // 2)
 
 def analyze_video(video_path: str, api_url: str, template_dir: str,
-                 max_frames: int = 84, output_dir: str = None,
-                 batch_size: int = 4) -> dict:
+                 max_frames: int = 64, output_dir: str = None,
+                 batch_size: int = 2) -> dict:
     """ Analyze an entire video by sending batches of frames to a 
         Koboldcpp API and get a rolling summary.
 
@@ -195,7 +192,7 @@ def update_progressive_summary(client, wrapper, current_summary, batch_analysis,
         summary_instruction,
         summary_content,
         summary_system
-    )[1]   
+    )[0]   
     return client.generate(
         prompt=summary_prompt,
         temperature=0,
@@ -224,7 +221,7 @@ def generate_final_summary(client, wrapper, results):
         final_instruction,
         final_content,
         final_system
-    )[1]
+    )[0]
     prompt_tokens = client.count_tokens(final_prompt)["count"]
     max_generation = (max_context - prompt_tokens) // 2
     
@@ -246,7 +243,7 @@ def main():
                       help="Maximum frames to analyze (default: 24)")
     parser.add_argument("--output-dir",
                       help="Output directory (default: video_name_analysis)")
-    parser.add_argument("--batch-size", type=int, default=1,
+    parser.add_argument("--batch-size", type=int, default=2,
                       help="Frames per batch (default: 2)")
     args = parser.parse_args()
     try:
