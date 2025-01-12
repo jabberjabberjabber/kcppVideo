@@ -1,3 +1,23 @@
+"""
+This file contains code adapted from Qwen-VL 
+https://github.com/QwenLM/Qwen2-VL/blob/main/qwen-vl-utils/src/qwen_vl_utils/vision_process.py
+
+Adapted portions Copyright 2024 Alibaba Cloud
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this adapted code except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+The following components are adapted from Qwen-VL:
+- Core resizing algorithms (smart_resize, smart_nframes)
+- Utility functions (round_by_factor, ceil_by_factor, floor_by_factor)
+- Key constants and parameters for video processing
+
+All other code Copyright 2024 github/jabberjabberjabber 
+Licensed under GNU General Public License v3.0
+"""
+
 import decord
 import base64
 from PIL import Image
